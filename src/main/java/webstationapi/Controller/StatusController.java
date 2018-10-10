@@ -12,8 +12,8 @@ public class StatusController {
 
     @GetMapping("/status")
     @ResponseBody
-    public ResponseEntity sendViaResponseEntity() {
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<String> sendViaResponseEntity() {
+        return new ResponseEntity<>("ok", HttpStatus.CREATED);
     }
 
 }
