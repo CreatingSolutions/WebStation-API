@@ -4,8 +4,16 @@ services:
     build: .
     ports:
      - "8080:8080"
+    links:
+      - "db:database"
   redis:
     image: "openjdk:8-jdk-alpine"
+  db:
+    image: mysql:5.7
+    environment:
+    - DB_NAME=test
+    - DB_USER=root
+    - DB_PASS=azerty
 
 
 
