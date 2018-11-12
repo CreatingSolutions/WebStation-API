@@ -4,15 +4,15 @@ package webstationapi.Entity;
 
 public class Flat {
 
-    long id_flat;
+    long idFlat;
     String description;
 
-    public long getId_flat() {
-        return id_flat;
+    public long getIdFlat() {
+        return idFlat;
     }
 
     public void setId_flat(long id_flat) {
-        this.id_flat = id_flat;
+        this.idFlat = id_flat;
     }
 
     public String getDescription() {
