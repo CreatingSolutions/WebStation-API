@@ -1,7 +1,8 @@
 package webstationapi.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,10 +10,17 @@ import java.util.UUID;
 @Table(name = "Profile")
 public class Profile {
 
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "guid"
+    )
+    @Column(name = "uuid", updatable = false, nullable = false)
     private UUID uuid;
 
     /* OneToOne */
-    private Account account;
+   // private Account account;
 
     private String firstName;
 
