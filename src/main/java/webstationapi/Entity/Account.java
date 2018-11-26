@@ -1,23 +1,15 @@
 package webstationapi.Entity;
 
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Account")
 public class Account {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "guid"
-    )
-    @Column(name = "uuid", updatable = false, nullable = false, columnDefinition = "VARCHAR(255)")
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private String emailAddress;
 
@@ -26,4 +18,38 @@ public class Account {
     private String salt;
 
     //private Profile profile;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getEncodedPassword() {
+        return encodedPassword;
+    }
+
+    public void setEncodedPassword(String encodedPassword) {
+        this.encodedPassword = encodedPassword;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 }
