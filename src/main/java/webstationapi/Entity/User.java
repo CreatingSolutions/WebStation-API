@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -24,5 +26,13 @@ public class User {
     @JsonIgnore
     private Token token;
 
-
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @JsonIgnore
+    private Collection<Role> roles = new ArrayList<Role>() {
+        {
+            add(Role.ROLE_USER);
+        }
+    };
 }
