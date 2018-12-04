@@ -44,7 +44,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 
             @Override
             public String getPassword() {
-                return user.getToken() == null ? null : user.getToken().getEncodedApplicationToken();
+                return user.getToken() == null ? null : user.getToken().getApplicationToken();
             }
 
             @Override

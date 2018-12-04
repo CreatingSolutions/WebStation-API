@@ -20,10 +20,12 @@ public class Token {
     @OneToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @Transient
+    @Column(name = "applicationToken")
     private String applicationToken;
 
+    /*
     @Column(name = "applicationToken")
     @JsonIgnore
     private String encodedApplicationToken;
+*/
 }
