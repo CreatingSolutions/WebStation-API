@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import webstationapi.Entity.Token;
 import webstationapi.Entity.User;
+import webstationapi.Exception.WebStationException;
 import webstationapi.Security.ApplicationPasswordEncoder;
 
 @Service
@@ -28,10 +29,10 @@ public class AuthenticationService {
     private User getUserfromCredentials(final String email, final String password) {
         final User user = userService.findByEmail(email);
         if (user == null) {
-            // TODO : make exception personaliser, UnauthorizedException
+            throw new WebStationException("user not exist");
         }
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            // TODO : make exception personaliser, UnauthorizedException
+            throw new WebStationException("Password not Match");
         }
         return user;
     }
