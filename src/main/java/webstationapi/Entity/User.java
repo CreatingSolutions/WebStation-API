@@ -4,8 +4,8 @@ package webstationapi.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Account")
-public class Account {
+@Table(name = "User")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

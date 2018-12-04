@@ -2,19 +2,19 @@ package webstationapi.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webstationapi.Entity.Account;
-import webstationapi.Repository.AccountRepository;
+import webstationapi.Entity.User;
+import webstationapi.Repository.UserRepository;
 
 @Service
-public class AccountService {
+public class UserService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     public void getAll() {
-        Iterable<Account> all = this.accountRepository.findAll();
+        Iterable<User> all = this.userRepository.findAll();
 
-        for (Account a : all) {
+        for (User a : all) {
             System.out.println("UUID => " + a.getId());
         }
 
