@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public class WebStationAuthenticationProvider implements AuthenticationProvider {
 
-    // Repo Account
-    // Account Manager
+    // Repo User
+    // User Manager
 
 
     public WebStationAuthenticationProvider() {
         // @NotNull manager
-        // Repo Account
+        // Repo User
 
     }
 

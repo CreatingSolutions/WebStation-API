@@ -12,7 +12,7 @@ public class Profile {
     private int uuid;
 
     /* OneToOne */
-    // private Account account;
+    // private User account;
 
     private String firstName;
 
