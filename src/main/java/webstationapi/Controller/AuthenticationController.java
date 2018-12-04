@@ -8,6 +8,7 @@ import webstationapi.DTO.CredentialsDTO;
 import webstationapi.Entity.Token;
 import webstationapi.Entity.User;
 import webstationapi.Service.AuthenticationService;
+import webstationapi.Service.UserService;
 
 import javax.validation.Valid;
 
@@ -18,22 +19,21 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    //private final UserService userService;
+    private final UserService userService;
 
     @PostMapping(path = "/login")
     public Token login(@Valid @RequestBody final CredentialsDTO credentials) {
-
-        return null;
+        return authenticationService.login(credentials.getEmail(), credentials.getPassword());
     }
 
     @GetMapping(path = "/logout")
     public ResponseEntity<Void> logout() {
-        return null;
+        return null; // TODO : le finir voir un truc sur le token
     }
 
     @PostMapping(path = "/register")
-    public User register() {
-        return null;
+    public User register(@Valid @RequestBody final CredentialsDTO credentials) {
+        return userService.register(credentials.toUser());
     }
 
 
