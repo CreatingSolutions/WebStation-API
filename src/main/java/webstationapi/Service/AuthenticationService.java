@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import webstationapi.DTO.TokenDTO;
 import webstationapi.Entity.Token;
 import webstationapi.Entity.User;
 import webstationapi.Exception.WebStationException;
@@ -46,7 +47,7 @@ public class AuthenticationService {
         final Token token = new Token();
         final String applicationToken = passwordEncoder.newRawApplicationToken();
         token.setApplicationToken(applicationToken);
-        token.setEncodedApplicationToken(passwordEncoder.encode(applicationToken));
+        //token.setEncodedApplicationToken(passwordEncoder.encode(applicationToken));
         token.setUser(user);
         tokenService.save(token);
 
@@ -56,7 +57,7 @@ public class AuthenticationService {
         return token;
     }
 
-    public void logout(@NonNull final User user) {
+    public void logout(@NonNull final TokenDTO user) {
         tokenService.deleteFrom(user);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webstationapi.DTO.ApiErrorDTO;
 import webstationapi.DTO.CredentialsDTO;
+import webstationapi.DTO.TokenDTO;
 import webstationapi.Entity.Token;
 import webstationapi.Entity.User;
 import webstationapi.Exception.WebStationException;
@@ -14,6 +15,7 @@ import webstationapi.Service.AuthenticationService;
 import webstationapi.Service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -32,7 +34,8 @@ public class AuthenticationController {
     }
 
     @GetMapping(path = "/logout")
-    public ResponseEntity<Void> logout() {
+    public ResponseEntity<Void> logout(TokenDTO token) {
+        authenticationService.logout(token);
         return null; // TODO : le finir voir un truc sur le token
     }
 

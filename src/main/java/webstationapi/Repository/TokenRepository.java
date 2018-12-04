@@ -7,4 +7,6 @@ import webstationapi.Entity.User;
 public interface TokenRepository extends CrudRepository<Token, Integer> {
 
     Token findByUser(User user);
+
+    Token findByApplicationToken(String applicationToken);
 }
