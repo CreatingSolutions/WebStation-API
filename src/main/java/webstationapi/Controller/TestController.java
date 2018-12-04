@@ -23,7 +23,6 @@ public class TestController {
     @GetMapping(path = "/")
     public @ResponseBody
     void addTest() {
-        userService.getAll();
     }
 
 }

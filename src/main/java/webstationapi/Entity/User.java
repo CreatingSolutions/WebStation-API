@@ -1,10 +1,15 @@
 package webstationapi.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -13,43 +18,11 @@ public class User {
 
     private String emailAddress;
 
-    private String encodedPassword;
+    private String password;
 
-    private String salt;
-
-    //private Profile profile;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Token token;
 
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getEncodedPassword() {
-        return encodedPassword;
-    }
-
-    public void setEncodedPassword(String encodedPassword) {
-        this.encodedPassword = encodedPassword;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
 }
