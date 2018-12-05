@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import webstationapi.Entity.Role;
 import webstationapi.Entity.User;
+import webstationapi.Exception.WebStationException;
 import webstationapi.Repository.UserRepository;
 import webstationapi.Security.ApplicationPasswordEncoder;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -27,25 +25,19 @@ public class UserService {
     @Transactional
     public User update(final User user) {
         if (userRepository.findByEmailAddress(user.getEmailAddress()) == null) {
-            return null; // TODO : throws new Exception Custom
+            throw new WebStationException("Mail doesn't match");
         }
         return userRepository.save(user);
     }
-
-    // TODO : revoir quand EXception perso
+    
     public User findById(Integer userId) {
-        try {
-            return userRepository.findById(userId).orElseThrow(Exception::new);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return userRepository.findById(userId).orElseThrow(() -> new WebStationException("bad user"));
     }
 
     @Transactional
     public User register(User user) {
         if (userRepository.findByEmailAddress(user.getEmailAddress()) != null) {
-            return null; // TODO : throws Perso Exception
+            throw new WebStationException("Mail exist");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
