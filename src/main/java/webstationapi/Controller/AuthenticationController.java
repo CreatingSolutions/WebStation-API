@@ -36,7 +36,7 @@ public class AuthenticationController {
     @GetMapping(path = "/logout")
     public ResponseEntity<Void> logout(TokenDTO token) {
         authenticationService.logout(token);
-        return null; // TODO : le finir voir un truc sur le token
+        return null;
     }
 
     @PostMapping(path = "/register")
