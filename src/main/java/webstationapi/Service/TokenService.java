@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webstationapi.DTO.TokenDTO;
 import webstationapi.Entity.Token;
-import webstationapi.Entity.User;
 import webstationapi.Repository.TokenRepository;
 
 @Service
@@ -26,7 +25,6 @@ public class TokenService {
     public void deleteFrom(final TokenDTO user) {
         String t = user.getToken();
         Token token = tokenRepository.findByApplicationToken(user.getToken());
-
 
 
         //final Token token = tokenRepository.findByUser(user);
