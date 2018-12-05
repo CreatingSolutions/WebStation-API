@@ -29,7 +29,7 @@ public class UserService {
         }
         return userRepository.save(user);
     }
-    
+
     public User findById(Integer userId) {
         return userRepository.findById(userId).orElseThrow(() -> new WebStationException("bad user"));
     }
