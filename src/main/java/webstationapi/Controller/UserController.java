@@ -10,14 +10,4 @@ public class UserController {
         // les services
     }
 
-    public void login(){
-
-    }
-    public void register(){
-
-    }
-    public void logout(){
-
-    }
-
 }
