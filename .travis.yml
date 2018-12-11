@@ -1,16 +1,33 @@
-language: java
-dist: trusty
-sudo: false
-install: true
+sudo: required
+services:
+- docker
+env:
+  global:
+  - IMAGE_NAME=damilink/api
+  - REGISTRY_USER=damilink
+  - REGISTRY_PASS=miagelille
 
-#addons:
-#  sonarcloud:
-#    organization: "creatingsolutions-github"
-#    token:
-#      secure: "VxEpTaHneXS1XdDrztoGp8oLaN40JcCUmR4QLZKBxPlcxFwXlDRsBXPodUeD6kbKR7gtDQVWbF3cW3Mxa5ibqPZkPfuQUiL0D0o8KudavXzt1uQOwHZlG2gJ7ZOeFDRJnoNJxfLiOzFxBbWVjZ+2AVr5XOoxnAQ2WXT9EV3t/FhPPEkibIGHT+utJNmO+LXK5Hq2HufVgJl9a99+T9essDj6Se8i/A69mzlxLtEgbngRiNY4JOKX7o1AFpuXySe7RagX7sJpvOOzabXfx0uNa5JozlL29SrTuN0H+Me+0DrYza/VhTDAsnUTHXJos4GwihQ91eVOcLAaCNW+IZN/r94emhIkrfQffEabnuIY6nxexgi7Gvbx3hoRxMRr3PY+F2yoy2ZkfGivpcKr1dMhbJViBJrFVKCZ0I+cWykYYRa8ku2gDSqbvoC+aP/ufuoYJuj8Z+HNKz0lBcC44NrBltLXzSTK6Y5wvodBlp9+rG32rMx6fqxklfOXYX+ZF0nZTUyUN8b9hIfnCMonNFnHg+/lTBAhNzvv6OKpaEdVLYNBbAtuVk2xIgmepG+JirBIGe6KStWWPbkAxu6MIP0r5nkdlKUUeSQTMHTzt3OhEfKP5L22mPtl2SO8/xKZnupWbmkUejSEndRPc2l1MYcYKB68+PAQlzi/c7KjC6tx0pg="
-
+before_script:
+- mvn install dockerfile:build
+- docker pull "$IMAGE_NAME" || true
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.projectKey=webstation-api -Dsonar.organization=creatingsolutions-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=9783fd07b0c4913531e23c6dddda24cfe871217d
+- docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME" .
 
-jdk:
-- oraclejdk8
+after_script:
+- docker images
+
+addons:
+  ssh_known_hosts: damien@51.75.140.39
+
+before_deploy:
+- docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+- docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+- openssl aes-256-cbc -K $encrypted_cdd528905de0_key -iv $encrypted_cdd528905de0_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: master
