@@ -1,25 +1,22 @@
 package webstationapi.Entity;
 
-
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
-@Entity
-public class Test {
-
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int uuid;
 
+    /* OneToOne */
+    // private User account;
 
-    public Integer getId() {
-        return id;
-    }
+    private String firstName;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String lastName;
+
+    private Date birthDate;
 }
