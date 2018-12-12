@@ -1,7 +1,5 @@
 package webstationapi.Entity;
 
-
-
 public class Flat {
 
     long idFlat;

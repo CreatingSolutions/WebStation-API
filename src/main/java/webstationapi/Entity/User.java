@@ -1,17 +1,23 @@
 package webstationapi.Entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Getter
-@Setter
 public class User {
 
     @Id
@@ -31,8 +37,19 @@ public class User {
     @Column(nullable = false)
     @JsonIgnore
     private Collection<Role> roles = new ArrayList<Role>() {
-        {
-            add(Role.ROLE_USER);
-        }
+		private static final long serialVersionUID = -3328919039745373393L;
+		{ add(Role.ROLE_USER); }
     };
+
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; }
+	public String getEmailAddress() { return emailAddress; }
+	public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
+	public String getPassword() { return password; }
+	public void setPassword(String password) { this.password = password; }
+	public Token getToken() { return token; }
+	public void setToken(Token token) { this.token = token; }
+	public Collection<Role> getRoles() { return roles; }
+	public void setRoles(Collection<Role> roles) { this.roles = roles; }
+	
 }
