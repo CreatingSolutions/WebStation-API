@@ -1,10 +1,10 @@
 package webstationapi.Service;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import lombok.NonNull;
 import webstationapi.DTO.TokenDTO;
 import webstationapi.Entity.Token;
 import webstationapi.Entity.User;
@@ -12,15 +12,16 @@ import webstationapi.Exception.WebStationException;
 import webstationapi.Security.ApplicationPasswordEncoder;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthenticationService {
 
+	@Autowired
+    private UserService userService;
 
-    private final UserService userService;
+	@Autowired
+    private TokenService tokenService;
 
-    private final TokenService tokenService;
-
-    private final ApplicationPasswordEncoder passwordEncoder;
+	@Autowired
+    private ApplicationPasswordEncoder passwordEncoder;
 
     @Transactional
     public Token login(final String email, final String password) {
@@ -30,10 +31,10 @@ public class AuthenticationService {
     private User getUserfromCredentials(final String email, final String password) {
         final User user = userService.findByEmail(email);
         if (user == null) {
-            throw new WebStationException("user not exist");
+            throw new WebStationException("User does not exist");
         }
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new WebStationException("Password not Match");
+            throw new WebStationException("Password does not match");
         }
         return user;
     }

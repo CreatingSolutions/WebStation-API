@@ -2,7 +2,9 @@ package webstationapi.Exception;
 
 public class WebStationException extends RuntimeException {
 
-    WebStationException() {
+	private static final long serialVersionUID = 5903894468039127451L;
+
+	WebStationException() {
         super();
     }
 

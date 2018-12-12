@@ -1,5 +1,7 @@
 package webstationapi.Controller;
 
+import java.util.List;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -8,22 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import webstationapi.Entity.Flat;
 
-import java.util.List;
+import webstationapi.Entity.Flat;
 
 @RestController
 @RequestMapping(path = "/flat")
 public class FlatController {
 
-    private String logementURL = "127.0.0.1:8083";
+    private String logementURL = "http://localhost:8083/flats";
 
     @GetMapping(path = "/")
-    public @ResponseBody
-    List<Flat> getFlats() {
+    public @ResponseBody List<Flat> getFlats() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Flat>> response = restTemplate.exchange(
-                "http://localhost:8083/flats",
+                logementURL,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Flat>>() {
