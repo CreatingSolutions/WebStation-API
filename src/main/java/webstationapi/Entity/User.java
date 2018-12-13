@@ -4,6 +4,7 @@ package webstationapi.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,6 +42,11 @@ public class User {
 		private static final long serialVersionUID = -3328919039745373393L;
 		{ add(Role.ROLE_USER); }
     };
+    
+    @OneToOne(cascade=CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @JsonIgnore
+    private Cart cart;
 
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
