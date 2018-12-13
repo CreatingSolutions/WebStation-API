@@ -42,10 +42,8 @@ public class User {
 		private static final long serialVersionUID = -3328919039745373393L;
 		{ add(Role.ROLE_USER); }
     };
-    
-    @OneToOne(cascade=CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @JsonIgnore
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Cart cart;
 
 	public int getId() { return id; }
