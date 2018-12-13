@@ -12,6 +12,7 @@ public class Cart {
 	@Id
 	@Column(name="userId")
 	private int userId;
+
 	private Collection<Integer> flatIds;
 
 	public Collection<Integer> getFlatIds() { return flatIds; }
