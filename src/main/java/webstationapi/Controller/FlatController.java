@@ -21,7 +21,7 @@ public class FlatController {
 
 //    private String logementURL = "http://localhost:8083/flats";
 
-    @GetMapping(path = "/")
+    @GetMapping
     public @ResponseBody List<Flat> getFlats() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Flat>> response = restTemplate.exchange(
