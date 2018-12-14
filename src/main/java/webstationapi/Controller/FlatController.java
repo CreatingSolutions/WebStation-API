@@ -17,13 +17,15 @@ import webstationapi.Entity.Flat;
 @RequestMapping(path = "/flat")
 public class FlatController {
 
-    private String logementURL = "http://localhost:8083/flats";
+    private String baseUrl = "http://51.75.140.39:8083";
+
+//    private String logementURL = "http://localhost:8083/flats";
 
     @GetMapping(path = "/")
     public @ResponseBody List<Flat> getFlats() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Flat>> response = restTemplate.exchange(
-                logementURL,
+                baseUrl+"/flats",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Flat>>() {
