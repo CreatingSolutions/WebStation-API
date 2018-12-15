@@ -62,4 +62,12 @@ public class CartService {
         }
         this.cartRepository.save(cart);
     }
+
+    @Transactional
+    public void delete(int iduser) {
+        Cart cart = this.findByUserId(iduser);
+        if (cart == null)
+            return;
+        this.cartRepository.delete(cart);
+    }
 }

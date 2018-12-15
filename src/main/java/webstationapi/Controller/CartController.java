@@ -55,5 +55,10 @@ public class CartController {
 
 	}
 
+	@PostMapping(path = "/delete")
+	public void deletePanier(@RequestParam int iduser){
+		this.cartService.delete(iduser);
+	}
+
 	
 }
