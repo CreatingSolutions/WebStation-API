@@ -40,27 +40,48 @@ public class CartService {
             cart = new Cart();
             cart.setUser(user);
             cart.addFlatId(idflat);
-        }else{
-            cart.addFlatId(idflat);
+        } else {
+        	if (!cart.getFlatIds().contains(idflat)) {
+        		cart.addFlatId(idflat);
+        	}
         }
-        this.cartRepository.save(cart);
+        cartRepository.save(cart);
     }
 
     @Transactional
     public void addCartElements(int userid, Collection<Integer> elements) {
         User user = this.userService.findById(userid);
-        if (user == null)
+        if (user == null) {
             return;
+        }
         Cart cart = this.findByUserId(userid);
 
         if (cart == null) {
             cart = new Cart();
             cart.setUser(user);
             cart.setFlatIds(elements);
-        }else{
+        } else {
             cart.setFlatIds(elements);
         }
-        this.cartRepository.save(cart);
+        cartRepository.save(cart);
+    }
+
+    @Transactional
+    public void removeElements(int userid, Collection<Integer> elements) {
+    	 User user = this.userService.findById(userid);
+         if (user == null) {
+             return;
+         }
+         Cart cart = this.findByUserId(userid);
+
+         if (cart == null) {
+             return;
+         } else {
+             for (Integer flatId : elements) {
+            	 cart.getFlatIds().remove(flatId);
+             }
+         }
+         cartRepository.save(cart);
     }
 
     @Transactional
@@ -68,6 +89,6 @@ public class CartService {
         Cart cart = this.findByUserId(iduser);
         if (cart == null)
             return;
-        this.cartRepository.delete(cart);
+        cartRepository.delete(cart);
     }
 }
