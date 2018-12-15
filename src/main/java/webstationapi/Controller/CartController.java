@@ -45,6 +45,11 @@ public class CartController {
 		this.cartService.addCartOneElement(userid, idflat);
 	}
 
+	@PostMapping(path = "/addElements")
+	public void addCartM(@RequestParam int userid, @RequestParam Collection<Integer> idflat){
+		this.cartService.addCartElements(userid, idflat);
+	}
+
 	@PostMapping(path = "/validate")
 	public void validatePanier(@RequestParam int iduser){
 
