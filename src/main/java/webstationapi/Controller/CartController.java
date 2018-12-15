@@ -18,7 +18,7 @@ public class CartController {
 
 	@Autowired
 	private CartService cartService;
-	
+
 	@GetMapping
     public CartDTO retrieveCart(int userId) {
     	CartDTO result = new CartDTO();
@@ -41,24 +41,33 @@ public class CartController {
     }
 
     @PostMapping(path = "/addOne")
-    public void addCart(@RequestParam int userid, @RequestParam int idflat){
-		this.cartService.addCartOneElement(userid, idflat);
+    public void addCart(@RequestParam int userId, @RequestParam int flatId){
+		cartService.addCartOneElement(userId, flatId);
 	}
 
+    @PostMapping(path = "/removeElements")
+    public void removeElement(@RequestParam int userId, @RequestParam Collection<Integer> flatIds) {
+    	cartService.removeElements(userId, flatIds);
+    }
+
 	@PostMapping(path = "/addElements")
-	public void addCartM(@RequestParam int userid, @RequestParam Collection<Integer> idflat){
-		this.cartService.addCartElements(userid, idflat);
+	public void addCartM(@RequestParam int userId, @RequestParam Collection<Integer> flatId){
+		cartService.addCartElements(userId, flatId);
 	}
 
 	@PostMapping(path = "/validate")
-	public void validatePanier(@RequestParam int iduser){
-
+	public void validatePanier(@RequestParam int userId){
+		/* Ici, il faut :
+		 * - Valider le paiement,
+		 * - Enregistrer les réservations en base,
+		 * - Supprimer le panier pour actualiser le front si et seulement si tout s'est bien passé. */
+		cartService.delete(userId);
 	}
 
 	@PostMapping(path = "/delete")
-	public void deletePanier(@RequestParam int iduser){
-		this.cartService.delete(iduser);
+	public void deletePanier(@RequestParam int userId){
+		cartService.delete(userId);
 	}
 
-	
+
 }
