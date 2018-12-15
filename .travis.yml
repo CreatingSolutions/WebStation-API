@@ -1,4 +1,12 @@
 sudo: required
+
+addons:
+  ssh_known_hosts: damien@51.75.140.39
+  sonarcloud:
+    organization: "creatingsolutions-github"
+    token:
+      secure: "Vzz42mHZ9tzGnw7ZURk1AKOAdSORtBxL6Yx0goahN2yhmrv5UVasl9COIxpF3m0MbM3S51ANmtsClJuZE8iY0g2rSdNtUGQMimgwwXlFRVfh2TKwtfBVUtY09okzMJinxBVM/k9aOugZSOAmK9JhWGsUCi/ZUrzrq33mTbU6TV1t0Ec7Y0guCS1DW4MCUIvU9r07ebt9i1C9gzJ368MeaBoiDXrY3OUq8n3NQvgG2nER7BziePtCzKgXOflTrR80eScBnGYckxRL5/QkLdyS4oBI2WNSOjlMxgzWkGbabteDiiFHGeoMi0MmJvjapyVYtvK74ytNIXpaShcGk+vlUgUtI04kEhdzbG6QYWF8JXnJXNS7g7A/n09Q5ReFkY/ZWUlZWfn4904DSQUFgvviPCTYpwuQPjuUobXPajTF3XB3XCkYOtLePdxQBWu+JRqxZtgC5ffrV94l0yvNA+vQIg7ql7jXrjR/XRaMWwQehagmJKChbBqchrVsSgoqw4pOhcnrPEj64U9o2HD4hqOVBdH2Ep1F7ghRZaXMsr3qOj5RXbg+u/pfLo75w/rt4O63S4pEODiCAlv6MHNTr1QaA8Eyv0HqnusNEmdRwH7qDg6RR8BHzCrtw76QEc//wdDaTpRegiYjJg6SQSnAvoe1hN/u6BPV/teY8FdCvSSrkSc="
+
 services:
 - docker
 env:
@@ -10,11 +18,10 @@ before_script:
 - mvn install dockerfile:build
 - docker pull "$IMAGE_NAME" || true
 script:
+- sonar-scanner
 - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME" .
 after_script:
 - docker images
-addons:
-  ssh_known_hosts: damien@51.75.140.39
 before_deploy:
 - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
