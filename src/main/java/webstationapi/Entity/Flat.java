@@ -9,6 +9,7 @@ public class Flat {
     boolean pets;
     boolean wifi;
     String orientation;
+    String title;
 
     public long getIdFlat() {
         return idFlat;
@@ -68,5 +69,13 @@ public class Flat {
 
     public void setOrientation(String orientation) {
         this.orientation = orientation;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
