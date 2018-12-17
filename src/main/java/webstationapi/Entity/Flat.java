@@ -2,7 +2,7 @@ package webstationapi.Entity;
 
 public class Flat {
 
-    long idFlat;
+    long flatId;
     String description;
     String nbPersonnes;
     boolean sdbwc;
@@ -11,12 +11,12 @@ public class Flat {
     String orientation;
     String title;
 
-    public long getIdFlat() {
-        return idFlat;
+    public long getFlatId() {
+        return flatId;
     }
 
-    public void setId_flat(long id_flat) {
-        this.idFlat = id_flat;
+    public void getFlatId(long flatId) {
+        this.flatId = flatId;
     }
 
     public String getDescription() {
@@ -27,8 +27,8 @@ public class Flat {
         this.description = description;
     }
 
-    public void setIdFlat(long idFlat) {
-        this.idFlat = idFlat;
+    public void setFlatId(long flatId) {
+        this.flatId = flatId;
     }
 
     public String getNbPersonnes() {
