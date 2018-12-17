@@ -30,9 +30,11 @@ public class CartController {
     		return new CartDTO();
 
     	for (int flatId : cart.getFlatIds()) {
-    		RestTemplate restTemplate = new RestTemplate();
-			Flat flt = restTemplate.getForObject("http://51.75.140.39:8083/flat/{id}", Flat.class, flatId);
-    		flats.add(flt);
+    		if (flatId != 0) {
+				RestTemplate restTemplate = new RestTemplate();
+				Flat flt = restTemplate.getForObject("http://51.75.140.39:8083/flat/{id}", Flat.class, flatId);
+				flats.add(flt);
+			}
     	}
 
 		result.setUserid(cart.getUser().getId());
