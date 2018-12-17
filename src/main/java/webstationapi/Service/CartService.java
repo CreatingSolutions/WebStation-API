@@ -1,15 +1,16 @@
 package webstationapi.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import webstationapi.Entity.Cart;
-import webstationapi.Entity.User;
-import webstationapi.Exception.WebStationException;
-import webstationapi.Repository.CartRepository;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
-import java.util.Collections;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import webstationapi.Entity.Cart;
+import webstationapi.Entity.User;
+import webstationapi.Repository.CartRepository;
 
 @Service
 public class CartService {
@@ -90,5 +91,13 @@ public class CartService {
         if (cart == null)
             return;
         cartRepository.delete(cart);
+    }
+    
+    @Transactional
+    public void createNewCart(User user) {
+    	Cart cart = new Cart();
+    	cart.setUser(user);
+    	cart.setFlatIds(new ArrayList<Integer>());
+    	cartRepository.save(cart);
     }
 }

@@ -17,6 +17,9 @@ public class UserService {
 
     @Autowired
     private ApplicationPasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private CartService cartService;
 
     public User findByEmail(final String email) {
         return userRepository.findByEmailAddress(email);
@@ -41,7 +44,9 @@ public class UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
-
+        
+        cartService.createNewCart(user);
+        
         return user;
     }
     
