@@ -2,6 +2,7 @@ package webstationapi.Controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import webstationapi.Entity.Flat;
 @RestController
 @RequestMapping(path = "/flat")
 public class FlatController {
+
 
     private String baseUrl = "http://51.75.140.39:8083";
 
