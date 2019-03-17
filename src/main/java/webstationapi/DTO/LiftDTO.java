@@ -1,44 +1,56 @@
 package webstationapi.DTO;
 
+import java.util.List;
+
 public class LiftDTO {
 
-    private Long id;
+    private String description;
 
-    private boolean insurrance = false;
+    private List<ForfaitDTO> normal;
 
-    private boolean isDiamond = false;
+    private List<ForfaitDTO> diamant;
 
-    private double nbFois = 0;
+    private ForfaitDTO unitaire;
 
-    public Long getId() {
-        return id;
+    private ForfaitDTO groupe;
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public boolean isInsurrance() {
-        return insurrance;
+    public List<ForfaitDTO> getNormal() {
+        return normal;
     }
 
-    public void setInsurrance(boolean insurrance) {
-        this.insurrance = insurrance;
+    public void setNormal(List<ForfaitDTO> normal) {
+        this.normal = normal;
     }
 
-    public boolean isDiamond() {
-        return isDiamond;
+    public List<ForfaitDTO> getDiamant() {
+        return diamant;
     }
 
-    public void setDiamond(boolean diamond) {
-        isDiamond = diamond;
+    public void setDiamant(List<ForfaitDTO> diamant) {
+        this.diamant = diamant;
     }
 
-    public double getNbFois() {
-        return nbFois;
+    public ForfaitDTO getUnitaire() {
+        return unitaire;
     }
 
-    public void setNbFois(double nbFois) {
-        this.nbFois = nbFois;
+    public void setUnitaire(ForfaitDTO unitaire) {
+        this.unitaire = unitaire;
+    }
+
+    public ForfaitDTO getGroupe() {
+        return groupe;
+    }
+
+    public void setGroupe(ForfaitDTO groupe) {
+        this.groupe = groupe;
     }
 }
