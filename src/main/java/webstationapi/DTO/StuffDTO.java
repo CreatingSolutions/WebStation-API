@@ -12,7 +12,7 @@ public class StuffDTO {
 
     private String img;
 
-    private List<QualityDTO> qualityDTOS;
+    private List<QualityDTO> qualities;
 
     public Long getStuffId() {
         return stuffId;
@@ -47,10 +47,10 @@ public class StuffDTO {
     }
 
     public List<QualityDTO> getQualityDTOS() {
-        return qualityDTOS;
+        return qualities;
     }
 
     public void setQualityDTOS(List<QualityDTO> qualityDTOS) {
-        this.qualityDTOS = qualityDTOS;
+        this.qualities = qualityDTOS;
     }
 }
