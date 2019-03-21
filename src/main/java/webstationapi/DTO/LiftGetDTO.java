@@ -13,7 +13,7 @@ public class LiftGetDTO {
 
     private int taked;
 
-    private boolean insurrance;
+    private boolean insurance;
 
     private Double price;
 }
