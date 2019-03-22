@@ -4,19 +4,31 @@ import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import webstationapi.DTO.ForfaitCartDTO;
 import webstationapi.DTO.ForfaitDTO;
 import webstationapi.DTO.LiftDTO;
+import webstationapi.DTO.TokenDTO;
 import webstationapi.Entity.Lift;
 import webstationapi.Entity.LiftBooking;
+import webstationapi.Entity.Token;
 import webstationapi.Enum.AgeEnum;
 import webstationapi.Enum.TypeEnum;
+import webstationapi.Utils.Utils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 @RestController
@@ -111,6 +123,20 @@ public class LiftController {
     }
 
     // Booking
+
+    @PostMapping("/")
+    public void addForfaitToCart(ForfaitCartDTO forfaitCartDTO, HttpServletRequest request){
+
+        String token = Utils.getToken(request.getHeader("authorization"));
+
+
+       
+
+
+
+    }
+
+
 
     @GetMapping("/liftbooking/{id}")
     public List<LiftBooking> getActiveBookByUser(@PathVariable Long id) {
