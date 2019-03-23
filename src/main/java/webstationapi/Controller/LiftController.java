@@ -141,8 +141,6 @@ public class LiftController {
         HttpEntity<LiftBookDTO> requestEntity = new HttpEntity<>(liftBookDTO, headers);
         ResponseEntity<Long> response = template.exchange(baseUrl + "/lift/add", HttpMethod.POST, requestEntity, Long.class);
 
-        System.out.println("Id Cart Lift " + response);
-
     }
 
 }
