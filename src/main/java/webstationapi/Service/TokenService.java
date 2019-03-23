@@ -33,4 +33,10 @@ public class TokenService {
 
         tokenRepository.delete(token);
     }
+
+    public int getUserId(String token){
+        Token byApplicationToken = this.tokenRepository.findByApplicationToken(token);
+        return byApplicationToken.getUser().getId();
+    }
+
 }

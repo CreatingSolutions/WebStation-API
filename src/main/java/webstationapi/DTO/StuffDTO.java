@@ -1,7 +1,10 @@
 package webstationapi.DTO;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class StuffDTO {
 
     private Long stuffId;
@@ -14,43 +17,4 @@ public class StuffDTO {
 
     private List<QualityDTO> qualities;
 
-    public Long getStuffId() {
-        return stuffId;
-    }
-
-    public void setStuffId(Long stuffId) {
-        this.stuffId = stuffId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getStore() {
-        return store;
-    }
-
-    public void setStore(String store) {
-        this.store = store;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public List<QualityDTO> getQualityDTOS() {
-        return qualities;
-    }
-
-    public void setQualityDTOS(List<QualityDTO> qualityDTOS) {
-        this.qualities = qualityDTOS;
-    }
 }
