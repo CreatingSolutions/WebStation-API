@@ -15,6 +15,8 @@ public class StuffDTO {
 
     private String img;
 
+    private Double price;
+
     private List<QualityDTO> qualities;
 
 }
