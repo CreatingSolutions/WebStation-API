@@ -1,6 +1,7 @@
 package webstationapi.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import webstationapi.DTO.CartDTO;
@@ -18,6 +19,25 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @Value("${api.flat.url}")
+    private String baseurlflat;
+
+    @Value("${api.stuff.url}")
+    private String baseurlstuff;
+
+    @Value("${api.lift.url}")
+    private String baseurllift;
+
+    @Value("${api.ecole.url}")
+    private String baseurlecole;
+
+
+    @GetMapping("")
+    public void retriveCart(){
+
+    }
+
+    /*
     @GetMapping
     public CartDTO retrieveCart(int userId) {
         CartDTO result = new CartDTO();
@@ -39,7 +59,7 @@ public class CartController {
         result.setUserid(cart.getUser().getId());
         result.setFlats(flats);
         return result;
-    }
+    }*/
 
     @PostMapping(path = "/addOne")
     public void addCart(@RequestParam int userId, @RequestParam int flatId) {
