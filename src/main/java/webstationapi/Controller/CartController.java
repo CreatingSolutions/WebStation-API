@@ -57,13 +57,13 @@ public class CartController {
 		cartService.addCartElements(userId, flatId);
 	}
 
-	@PostMapping(path = "/validate")
-	public void validatePanier(@RequestParam int userId){
+	@PostMapping(path = "/valider")
+	public void validatePanier(){
 		/* Ici, il faut :
 		 * - Valider le paiement,
 		 * - Enregistrer les réservations en base,
 		 * - Supprimer le panier pour actualiser le front si et seulement si tout s'est bien passé. */
-		cartService.delete(userId);
+		//cartService.delete(userId);
 	}
 
 	@PostMapping(path = "/delete")
