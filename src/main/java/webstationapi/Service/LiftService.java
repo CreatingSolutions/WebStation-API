@@ -1,18 +1,16 @@
 package webstationapi.Service;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import webstationapi.DTO.ForfaitCartDTO;
 import webstationapi.Entity.LiftBooking;
+import webstationapi.Entity.Token;
+import webstationapi.Repository.TokenRepository;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.List;
-import java.util.UUID;
-
+@Service
 public class LiftService {
 
-
-    public Document makePdf(Long iduser, List<LiftBooking> allBookByUser) throws FileNotFoundException, DocumentException {
+   /* public Document makePdf(Long iduser, List<LiftBooking> allBookByUser) throws FileNotFoundException, DocumentException {
         
         Document document = new Document();
         UUID uuid = UUID.randomUUID();
@@ -44,5 +42,5 @@ public class LiftService {
         document.close();
         return document;
     }
-
+*/
 }
