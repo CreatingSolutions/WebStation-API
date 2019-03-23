@@ -14,7 +14,7 @@ import webstationapi.Entity.Flat;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/flat")
+@RequestMapping(path = "/flats")
 public class FlatController {
 
     @Value("${api.flat.url}")
