@@ -8,7 +8,10 @@ import webstationapi.DTO.CartDTO;
 import webstationapi.Entity.Cart;
 import webstationapi.Entity.Flat;
 import webstationapi.Service.CartService;
+import webstationapi.Service.TokenService;
+import webstationapi.Utils.Utils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -31,10 +34,19 @@ public class CartController {
     @Value("${api.ecole.url}")
     private String baseurlecole;
 
+    @Autowired
+    private TokenService tokenService;
 
     @GetMapping("")
-    public void retriveCart(){
+    public void retriveCart(HttpServletRequest request){
+        String authorization = request.getHeader("authorization");
+        if (authorization == null)
+            return;
 
+        String token = Utils.getToken(authorization);
+        int userId = this.tokenService.getUserId(token);
+
+        System.out.println(userId);
     }
 
     /*
