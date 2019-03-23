@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import webstationapi.DTO.ForfaitCartDTO;
+import webstationapi.DTO.LiftBookDTO;
 import webstationapi.DTO.LiftDTO;
 import webstationapi.Entity.Lift;
 import webstationapi.Enum.AgeEnum;
@@ -125,6 +126,22 @@ public class LiftController {
         String token = Utils.getToken(authorization);
         int userId = this.tokenService.getUserId(token);
 
+        LiftBookDTO liftBookDTO = new LiftBookDTO();
+        liftBookDTO.setInsurance(forfaitCartDTO.isInsurance());
+        liftBookDTO.setLiftId(forfaitCartDTO.getLiftId());
+        liftBookDTO.setTaked(forfaitCartDTO.getTaked());
+        liftBookDTO.setUserId(userId);
+
+
+        RestTemplate template = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<LiftBookDTO> requestEntity = new HttpEntity<>(liftBookDTO, headers);
+        ResponseEntity<Long> response = template.exchange(baseUrl + "/lift/add", HttpMethod.POST, requestEntity, Long.class);
+
+        System.out.println("Id Cart Lift " + response);
 
     }
 
