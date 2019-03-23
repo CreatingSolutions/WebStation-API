@@ -73,7 +73,7 @@ public class StuffController {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<StuffSendDTO> requestEntity = new HttpEntity<>(stuffSendDTO, headers);
-        ResponseEntity<Long> response = template.exchange(baseUrl + "/add", HttpMethod.POST, requestEntity, Long.class);
+        ResponseEntity<Long> response = template.exchange(baseUrl + "/stuffs/add", HttpMethod.POST, requestEntity, Long.class);
 
     }
 }
