@@ -21,5 +21,5 @@ public class FlatsBook {
     private int userid;
 
     private int idflat;
-    
+
 }

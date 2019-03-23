@@ -2,18 +2,22 @@ package webstationapi.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import webstationapi.DTO.CartDTO;
-import webstationapi.Entity.Cart;
-import webstationapi.Entity.Flat;
+import org.springframework.web.util.UriComponentsBuilder;
+import webstationapi.Entity.FlatsBook;
+import webstationapi.Entity.LiftBooking;
+import webstationapi.Entity.StuffBook;
 import webstationapi.Service.CartService;
+import webstationapi.Service.FlatService;
 import webstationapi.Service.TokenService;
 import webstationapi.Utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/cart")
@@ -37,8 +41,11 @@ public class CartController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private FlatService flatService;
+
     @GetMapping("")
-    public void retriveCart(HttpServletRequest request){
+    public void retriveCart(HttpServletRequest request) {
         String authorization = request.getHeader("authorization");
         if (authorization == null)
             return;
@@ -46,7 +53,51 @@ public class CartController {
         String token = Utils.getToken(authorization);
         int userId = this.tokenService.getUserId(token);
 
+        List<StuffBook> stuffCart = this.getStuffCart(userId);
+        List<LiftBooking> mecaCart = this.getMecaCart(userId);
+        List<FlatsBook> flatcart = this.flatService.getcart(userId);
+
+
         System.out.println(userId);
+    }
+
+    private List<LiftBooking> getMecaCart(int userId) {
+        UriComponentsBuilder builder = this.buildUrl(userId, baseurllift + "/b/");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<List<LiftBooking>> exchange = restTemplate.exchange(
+                builder.toUriString(),
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<List<LiftBooking>>() {
+                });
+        return exchange.getBody();
+    }
+
+    private List<StuffBook> getStuffCart(int userId) {
+        UriComponentsBuilder builder = this.buildUrl(userId, baseurlstuff + "/stuffs");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<List<StuffBook>> exchange = restTemplate.exchange(
+                builder.toUriString(),
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<List<StuffBook>>() {
+                });
+        return exchange.getBody();
+    }
+
+    private UriComponentsBuilder buildUrl(int iduser, String url) {
+        return UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("iduser", iduser);
     }
 
     /*
