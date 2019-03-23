@@ -1,7 +1,6 @@
 package webstationapi.Entity;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,18 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Data
+@Entity
 @Getter
 @Setter
-public class LiftBooking {
+public class FlatsBook {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private Long liftId;
+    private int userid;
 
-    private int userId;
-
-    private boolean insurance;
-
-    private Double price;
+    private int idflat;
 
 }
