@@ -124,20 +124,21 @@ public class LiftController {
 
     // Booking
 
-    @PostMapping("/")
-    public void addForfaitToCart(ForfaitCartDTO forfaitCartDTO, HttpServletRequest request){
+    @PostMapping("")
+    public void addForfaitToCart(@RequestBody ForfaitCartDTO forfaitCartDTO, HttpServletRequest request){
 
-        String token = Utils.getToken(request.getHeader("authorization"));
+        String authorization = request.getHeader("authorization");
+        if (authorization == null)
+            return;
 
-
-       
+        String token = Utils.getToken(authorization);
 
 
 
     }
 
 
-
+/*
     @GetMapping("/liftbooking/{id}")
     public List<LiftBooking> getActiveBookByUser(@PathVariable Long id) {
         RestTemplate restTemplate = new RestTemplate();
@@ -168,5 +169,5 @@ public class LiftController {
         // Need TO Generate IN API
         //this.liftBookingService.makePdf(iduser);
     }
-
+    */
 }
