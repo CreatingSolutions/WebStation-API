@@ -7,6 +7,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import webstationapi.DTO.CartFinalDTO;
 import webstationapi.Entity.FlatsBook;
 import webstationapi.Entity.LiftBooking;
 import webstationapi.Entity.StuffBook;
@@ -45,24 +46,34 @@ public class CartController {
     private FlatService flatService;
 
     @GetMapping("")
-    public void retriveCart(HttpServletRequest request) {
+    public CartFinalDTO retriveCart(HttpServletRequest request) {
         String authorization = request.getHeader("authorization");
         if (authorization == null)
-            return;
+            return null;
 
         String token = Utils.getToken(authorization);
         int userId = this.tokenService.getUserId(token);
 
-        List<StuffBook> stuffCart = this.getStuffCart(userId);
-        List<LiftBooking> mecaCart = this.getMecaCart(userId);
-        List<FlatsBook> flatcart = this.flatService.getcart(userId);
+        //List<StuffBook> stuffCart = this.getStuffCart(userId);
+       // List<LiftBooking> mecaCart = this.getMecaCart(userId);
+        //List<FlatsBook> flatcart = this.flatService.getcart(userId);
+
+       // double sumStuff = stuffCart.stream().mapToDouble(StuffBook::getPrice).sum();
+       // double sumMeca = mecaCart.stream().mapToDouble(LiftBooking::getPrice).sum();
 
 
-        System.out.println(userId);
+        CartFinalDTO cartFinalDTO = new CartFinalDTO();
+        cartFinalDTO.setCartId(1L);
+        //cartFinalDTO.setTotalStuffPrice(sumStuff);
+        cartFinalDTO.setTotalLiftPrice(42.0);
+
+
+
+        return cartFinalDTO;
     }
 
     private List<LiftBooking> getMecaCart(int userId) {
-        UriComponentsBuilder builder = this.buildUrl(userId, baseurllift + "/b/");
+        UriComponentsBuilder builder = this.buildUrl(userId, baseurllift + "/liftbook");
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
